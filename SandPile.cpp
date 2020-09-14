@@ -38,9 +38,11 @@ void SandPile::stabilize() {
 
 std::string SandPile::toString() const {
     string s = "";
+    //int c = 0;
     for (int i = 0; i < ARRAY_SIZE; i++){
         if (i == 3 || i == 6){s+="/";}
-        s+= pile[i];
+        //c = pile[i];
+        s += to_string(pile[i]);
     }
 
     return s;

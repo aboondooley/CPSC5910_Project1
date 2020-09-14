@@ -4,6 +4,7 @@
 
 #ifndef PROJECT1_SANDPILES_SANDPILE_H
 #define PROJECT1_SANDPILES_SANDPILE_H
+# include <vector>
 
 const int ARRAY_SIZE = 9;
 class SandPile {
