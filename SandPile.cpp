@@ -3,9 +3,13 @@
 //
 
 #include <iostream>
+#include <vector>
 #include "SandPile.h"
+using namespace std;
 
 void SandPile::setPile(const int *cells) {
+    // TODO add an edge case to do nothing if a number is negative (or type
+    //  is not a number)
     for (int i = 0; i < ARRAY_SIZE; i++){
         this->pile[i] = cells[i];
     }
@@ -25,21 +29,32 @@ void SandPile::stabilize() {
 }
 
 std::string SandPile::toString() const {
-    return std::__cxx11::string();
+    return std::string();
 }
 
-int *SandPile::toppleList() const {
-    return nullptr;
+vector<int>* SandPile::toppleList() const {
+    vector<int>* topple_list = new vector<int>; // Create space to hold
+    // list of indexes to topple (>3)
+    for (int i = 0; i < ARRAY_SIZE; i++){
+        if (this->pile[i] > 3){
+            topple_list->push_back(i);
+        }
+    }
+
+    return topple_list;
 }
 
-void SandPile::topple(const int *topple_list) {
+void SandPile::topple(const vector<int> *topple_list) {
+    const int n = topple_list->size();
+    for (int i = 0; i < n; i++){
+
+    }
+}
+
+void SandPile::giveToNeighbors(const vector<int> *neighbors) {
 
 }
 
-void SandPile::giveToNeighbors(const int *neighbors) {
-
-}
-
-int *SandPile::getNeighbors(const int *toppleList) const {
+vector<int>* SandPile::getNeighbors(const vector<int> *toppleList) const {
     return nullptr;
 }
