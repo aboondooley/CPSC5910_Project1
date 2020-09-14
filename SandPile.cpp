@@ -26,19 +26,32 @@ bool SandPile::isStable() const {
 }
 
 void SandPile::stabilize() {
-
+    vector<int> topple_list;
+    vector<int> neighbors;
+    while (!isStable()){
+        topple_list = toppleList(); //indexes of those to topple
+        topple(topple_list);
+        neighbors = getNeighbors(topple_list);
+        giveToNeighbors(neighbors);
+    }
 }
 
 std::string SandPile::toString() const {
-    return std::string();
+    string s = "";
+    for (int i = 0; i < ARRAY_SIZE; i++){
+        if (i == 3 || i == 6){s+="/";}
+        s+= pile[i];
+    }
+
+    return s;
 }
 
-vector<int>* SandPile::toppleList() const {
-    vector<int>* topple_list = new vector<int>; // Create space to hold
+vector<int> SandPile::toppleList() const {
+    vector<int> topple_list; // Create space to hold
     // list of indexes to topple (>3)
     for (int i = 0; i < ARRAY_SIZE; i++){
         if (this->pile[i] > 3){
-            topple_list->push_back(i);
+            topple_list.push_back(i);
         }
     }
 
@@ -52,8 +65,8 @@ void SandPile::topple(const vector<int> topple_list) {
     }
 }
 
-vector<int>* SandPile::getNeighbors(const vector<int> topple_list) const {
-    vector<int>* neighbors = new vector<int>;
+vector<int> SandPile::getNeighbors(const vector<int> topple_list) const {
+    vector<int> neighbors;
     //const int n = topple_list.size();
     //const int s = sqrt(ARRAY_SIZE);
     for (int i = 0; i < topple_list.size(); i++){
@@ -65,46 +78,46 @@ vector<int>* SandPile::getNeighbors(const vector<int> topple_list) const {
 
         switch (topple_list[i]) {
             case 0:
-                neighbors->push_back(1);
-                neighbors->push_back(3);
+                neighbors.push_back(1);
+                neighbors.push_back(3);
                 break;
             case 1:
-                neighbors->push_back(0);
-                neighbors->push_back(2);
-                neighbors->push_back(4);
+                neighbors.push_back(0);
+                neighbors.push_back(2);
+                neighbors.push_back(4);
                 break;
             case 2:
-                neighbors->push_back(1);
-                neighbors->push_back(5);
+                neighbors.push_back(1);
+                neighbors.push_back(5);
                 break;
             case 3:
-                neighbors->push_back(0);
-                neighbors->push_back(4);
-                neighbors->push_back(6);
+                neighbors.push_back(0);
+                neighbors.push_back(4);
+                neighbors.push_back(6);
                 break;
             case 4:
-                neighbors->push_back(1);
-                neighbors->push_back(3);
-                neighbors->push_back(5);
-                neighbors->push_back(7);
+                neighbors.push_back(1);
+                neighbors.push_back(3);
+                neighbors.push_back(5);
+                neighbors.push_back(7);
                 break;
             case 5:
-                neighbors->push_back(2);
-                neighbors->push_back(4);
-                neighbors->push_back(8);
+                neighbors.push_back(2);
+                neighbors.push_back(4);
+                neighbors.push_back(8);
                 break;
             case 6:
-                neighbors->push_back(3);
-                neighbors->push_back(7);
+                neighbors.push_back(3);
+                neighbors.push_back(7);
                 break;
             case 7:
-                neighbors->push_back(4);
-                neighbors->push_back(6);
-                neighbors->push_back(8);
+                neighbors.push_back(4);
+                neighbors.push_back(6);
+                neighbors.push_back(8);
                 break;
             case 8:
-                neighbors->push_back(5);
-                neighbors->push_back(7);
+                neighbors.push_back(5);
+                neighbors.push_back(7);
                 break;
         }
 
