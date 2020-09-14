@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 #include "SandPile.h"
 using namespace std;
 
@@ -46,16 +47,68 @@ vector<int>* SandPile::toppleList() const {
 
 void SandPile::topple(const vector<int> topple_list) {
     const int n = topple_list.size();
-    int t = 0;
     for (int i = 0; i < n; i++){
-        t = topple_list[i];
-        this->pile[t]-=4;
+        this->pile[topple_list[i]]-=4;
     }
 }
 
 vector<int>* SandPile::getNeighbors(const vector<int> topple_list) const {
+    vector<int>* neighbors = new vector<int>;
+    const int n = topple_list.size();
+    const int s = sqrt(ARRAY_SIZE);
+    for (int i = 0; i < n; i++){
+        /*if (i+1>=0&&i+1<9) {neighbors->push_back(i+1);}
+        if (i-1>=0&&i-1<9) {neighbors->push_back(i-1);}
+        if (i+s>=0&&i+s<9) {neighbors->push_back(i+s);}
+        if (i-s>=0&&i-s<9) {neighbors->push_back(i-s);}
+         */
 
-    return nullptr;
+        switch (topple_list[i]) {
+            case 0:
+                neighbors->push_back(1);
+                neighbors->push_back(3);
+                break;
+            case 1:
+                neighbors->push_back(0);
+                neighbors->push_back(2);
+                neighbors->push_back(4);
+                break;
+            case 2:
+                neighbors->push_back(1);
+                neighbors->push_back(5);
+                break;
+            case 3:
+                neighbors->push_back(0);
+                neighbors->push_back(4);
+                neighbors->push_back(6);
+                break;
+            case 4:
+                neighbors->push_back(1);
+                neighbors->push_back(3);
+                neighbors->push_back(5);
+                neighbors->push_back(7);
+                break;
+            case 5:
+                neighbors->push_back(2);
+                neighbors->push_back(4);
+                neighbors->push_back(8);
+                break;
+            case 6:
+                neighbors->push_back(3);
+                neighbors->push_back(7);
+                break;
+            case 7:
+                neighbors->push_back(4);
+                neighbors->push_back(6);
+                neighbors->push_back(8);
+                break;
+            case 8:
+                neighbors->push_back(5);
+                neighbors->push_back(7);
+                break;
+
+    }
+    return neighbors;
 }
 
 void SandPile::giveToNeighbors(const vector<int> neighbors) {
