@@ -44,17 +44,22 @@ vector<int>* SandPile::toppleList() const {
     return topple_list;
 }
 
-void SandPile::topple(const vector<int> *topple_list) {
-    const int n = topple_list->size();
+void SandPile::topple(const vector<int> topple_list) {
+    const int n = topple_list.size();
+    int t = 0;
     for (int i = 0; i < n; i++){
-
+        t = topple_list[i];
+        this->pile[t]-=4;
     }
 }
 
-void SandPile::giveToNeighbors(const vector<int> *neighbors) {
+vector<int>* SandPile::getNeighbors(const vector<int> topple_list) const {
 
-}
-
-vector<int>* SandPile::getNeighbors(const vector<int> *toppleList) const {
     return nullptr;
 }
+
+void SandPile::giveToNeighbors(const vector<int> neighbors) {
+
+}
+
+

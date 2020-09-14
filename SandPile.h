@@ -44,9 +44,9 @@ public:
 private:
     int pile[ARRAY_SIZE];
     std::vector<int>* toppleList() const;
-    void topple(const std::vector<int>* topple_list);
-    void giveToNeighbors(const std::vector<int>* neighbors);
-    std::vector<int>* getNeighbors(const std::vector<int>* topple_list) const;
+    void topple(const std::vector<int> topple_list);
+    void giveToNeighbors(const std::vector<int> neighbors);
+    std::vector<int>* getNeighbors(const std::vector<int> topple_list) const;
 
 };
 
