@@ -59,7 +59,7 @@ int main() {
     pile6.stabilize();
     cout << " after: " << pile6.toString() << endl;
 
-    cout << "16 % 4 = " << 16%4 << ", 16 % 8 = " << 16%8 << endl;
+    cout << "1 % 3 = " << 1%3 << ", 16 % 8 = " << 16%8 << endl;
 
 
     return 0;
