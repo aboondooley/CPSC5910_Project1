@@ -1,3 +1,5 @@
+//TODO create documentation for the sandpile class as a whole
+
 //
 // Created by Alie on 9/10/2020.
 // I added green comment chunks for the private helper functions I created.
@@ -29,10 +31,10 @@ void SandPile::setPile(const int *cells) {
     }
 }
 
-// Checks to see if the Sandpile is stable (no cells > 3)
+// Checks to see if the Sandpile is stable (no cells > MAX_STABLE)
 bool SandPile::isStable() const {
     for (int i = 0; i < ARRAY_SIZE; i++) {
-        if (this->pile[i] > 3) {
+        if (this->pile[i] > MAX_STABLE) {
             return false;
         }
     }
@@ -68,12 +70,16 @@ void SandPile::stabilize() {
 //Creates a visual representation of the Sandpile for printing
 std::string SandPile::toString() const {
     string s = "";
-    for (int i = 0; i < ARRAY_SIZE - 1; i++) {
-        if (i == 3 || i == 6) { s += "/ "; }
-        s += to_string(pile[i]);
-        s += " ";
+    if (ARRAY_SIZE>0){
+        s += to_string(pile[0]);
+        for (int i = 1; i < ARRAY_SIZE; i++) {
+            s += " ";
+            if (i % ROWS == 0) { s += "/ "; }
+            s += to_string(pile[i]);
+        }
+
     }
-    s += to_string(pile[ARRAY_SIZE - 1]);
+
 
     return s;
 }
@@ -81,14 +87,14 @@ std::string SandPile::toString() const {
 /**
  * First helper function for stabilize()
  * Goes through each element of the Sandpile and creates a list (stored in a
- * vector) that need to be "toppled" (>3) and passes the list back
+ * vector) that need to be "toppled" (>MAX_STABLE) and passes the list back
  * @return a vector of indexes to topple
  */
 vector<int> SandPile::toppleList() const {
     vector<int> topple_list; // Create space to hold
-    // list of indexes to topple (>3)
+    // list of indexes to topple (>MAX_STABLE)
     for (int i = 0; i < ARRAY_SIZE; i++) {
-        if (this->pile[i] > 3) {
+        if (this->pile[i] > MAX_STABLE) {
             topple_list.push_back(i);
         }
     }

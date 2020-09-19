@@ -7,11 +7,16 @@
 
 # include <vector>
 
-const int ARRAY_SIZE = 9;
+
 
 class SandPile {
 
 public:
+    static const int ROWS = 3; // number of rows
+    static const int COLS = 3; // number of columns -
+    // allows for non-square configurations
+    static const int MAX_STABLE = 3; // user can control how many pieces of
+    // sand are stable
 
     /**
      * Set the values of each cell in this sand pile.
@@ -27,6 +32,7 @@ public:
      * @return true if it won't topple, false if it will
      */
     bool isStable() const;
+
 
     /**
      * Topple this sand pile until it is stable (according to toppling rules).
@@ -45,6 +51,7 @@ public:
 
 
 private:
+    static const int ARRAY_SIZE = ROWS * COLS;
     int pile[ARRAY_SIZE];
     bool allPositive = true; // keeps track of whether there was a negative
     // value in the Sandpile
@@ -61,6 +68,7 @@ private:
 
     // Adds 1 grain of sand to each index in the neighbors vector
     std::vector<int> getNeighbors(const std::vector<int> topple_list) const;
+
 
 };
 
