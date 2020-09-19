@@ -16,11 +16,21 @@ using namespace std;
 // the Sandpile is created but will refuse to stabilize.
 // This is my interpretation of the advice to do nothing if there is a negative
 // value.
-void SandPile::setPile(const int *cells) {
+SandPile::SandPile(){
+    vector<int> zero = {2, 1, 2, 1, 0, 1, 2, 1, 2};
+    for (int i = 0; i < ARRAY_SIZE; i++){
+        pile[i] = zero[i];
+    }
+
+}
+
+
+SandPile::SandPile(const int *cells) {
     for (int i = 0; i < ARRAY_SIZE; i++) {
-        this->pile[i] = cells[i];
+        pile[i] = cells[i];
         if (cells[i] < 0) {
-            allPositive = false; // adds a flag that there is a negative value
+            allPositive = false; // adds a flag that there is a negative
+            // value
         }
     }
 
@@ -34,7 +44,7 @@ void SandPile::setPile(const int *cells) {
 // Checks to see if the Sandpile is stable (no cells > MAX_STABLE)
 bool SandPile::isStable() const {
     for (int i = 0; i < ARRAY_SIZE; i++) {
-        if (this->pile[i] > MAX_STABLE) {
+        if (pile[i] > MAX_STABLE) {
             return false;
         }
     }
@@ -91,7 +101,7 @@ vector<int> SandPile::toppleList() const {
     vector<int> topple_list; // Create space to hold
     // list of indexes to topple (>MAX_STABLE)
     for (int i = 0; i < ARRAY_SIZE; i++) {
-        if (this->pile[i] > MAX_STABLE) {
+        if (pile[i] > MAX_STABLE) {
             topple_list.push_back(i);
         }
     }
@@ -107,7 +117,7 @@ for each element in the vector, 4 is subtracted from that element
  */
 void SandPile::topple(const vector<int> topple_list) {
     for (int i = 0; i < topple_list.size(); i++) {
-        this->pile[topple_list[i]] -= MAX_STABLE+1;
+        pile[topple_list[i]] -= MAX_STABLE+1;
     }
 }
 
@@ -157,8 +167,18 @@ toppled cells
  */
 void SandPile::giveToNeighbors(const vector<int> neighbors) {
     for (int i = 0; i < neighbors.size(); i++) {
-        this->pile[neighbors[i]] += 1;
+        pile[neighbors[i]] += 1;
     }
 }
 
-
+void SandPile::addPile(const SandPile &other){
+    if (this->allPositive && other.allPositive) {
+        for (int i = 0; i < this->ARRAY_SIZE; i++) {
+            this->pile[i] += other.pile[i];
+        }
+        this->stabilize();
+    } else {
+        cout << "Oh no! One of the SandPiles contains a negative number. "
+                "\n Cannot add them." << endl;
+    }
+}

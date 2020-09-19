@@ -22,8 +22,9 @@ public:
      * Set the values of each cell in this sand pile.
      * @param cells 1st row elements, then 2nd, etc., all in one flat array
      */
-    void setPile(const int *cells); // copies the integers into a new object
-
+    //void setPile(const int *cells); // copies the integers into a new object
+    SandPile(); // constructor with no arguments gives a zero
+    SandPile(const int *cells);
     /**
      * Is this sand pile stable or will it topple?
      * I.e., if there are any cells over 3 (SandPile::MAX_STABLE) then it will
@@ -49,6 +50,13 @@ public:
      */
     std::string toString() const;
 
+    /**
+    * Add in the cells of another sand pile into this one and restabilize.
+    * I.e., implements: this = this + other, and then stabilize.
+    * @param other    addend sand pile
+    */
+    void addPile(const SandPile &other);
+
 
 private:
     static const int ARRAY_SIZE = ROWS * COLS;
@@ -68,7 +76,6 @@ private:
 
     // Adds 1 grain of sand to each index in the neighbors vector
     std::vector<int> getNeighbors(const std::vector<int> topple_list) const;
-
 
 };
 
