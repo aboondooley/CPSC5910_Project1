@@ -22,7 +22,7 @@ public:
      * Set the values of each cell in this sand pile.
      * @param cells 1st row elements, then 2nd, etc., all in one flat array
      */
-    //void setPile(const int *cells); // copies the integers into a new object
+    void setPile(const int *cells); // copies the integers into a new object
     SandPile(); // constructor with no arguments gives a zero
     SandPile(const int *cells);
     /**
@@ -60,7 +60,7 @@ public:
 
 private:
     static const int ARRAY_SIZE = ROWS * COLS;
-    int pile[ARRAY_SIZE];
+    int *pile;
     bool allPositive = true; // keeps track of whether there was a negative
     // value in the Sandpile
 

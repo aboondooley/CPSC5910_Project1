@@ -16,21 +16,12 @@ using namespace std;
 // the Sandpile is created but will refuse to stabilize.
 // This is my interpretation of the advice to do nothing if there is a negative
 // value.
-SandPile::SandPile(){
-    vector<int> zero = {2, 1, 2, 1, 0, 1, 2, 1, 2};
-    for (int i = 0; i < ARRAY_SIZE; i++){
-        pile[i] = zero[i];
-    }
 
-}
-
-
-SandPile::SandPile(const int *cells) {
+void SandPile::setPile(const int *cells) {
     for (int i = 0; i < ARRAY_SIZE; i++) {
-        pile[i] = cells[i];
+        this->pile[i] = cells[i];
         if (cells[i] < 0) {
-            allPositive = false; // adds a flag that there is a negative
-            // value
+            allPositive = false; // adds a flag that there is a negative value
         }
     }
 
@@ -39,6 +30,19 @@ SandPile::SandPile(const int *cells) {
         cout << "Oh no, there is a negative value! \nThe Sandpile will refuse"
                 " to stabilize.\nPlease try again." << endl;
     }
+}
+
+SandPile::SandPile(){
+    pile = new int[ARRAY_SIZE];
+    int zero[] = {2, 1, 2, 1, 0, 1, 2, 1, 2};
+    this->setPile(zero);
+
+}
+
+
+SandPile::SandPile(const int *cells) {
+    pile = new int[ARRAY_SIZE];
+    this->setPile(cells);
 }
 
 // Checks to see if the Sandpile is stable (no cells > MAX_STABLE)
