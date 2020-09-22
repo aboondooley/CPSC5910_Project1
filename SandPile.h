@@ -57,6 +57,9 @@ public:
     */
     void addPile(const SandPile &other);
 
+    bool isInGroup() const;
+
+
 
 private:
     static const int ARRAY_SIZE = ROWS * COLS;

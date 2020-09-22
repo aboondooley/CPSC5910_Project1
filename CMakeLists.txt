@@ -3,4 +3,4 @@ project(Project1_SandPiles)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Project1_SandPiles main.cpp SandPile.cpp SandPile.h)
+add_executable(Project1_SandPiles p1_test.cpp SandPile.cpp SandPile.h)

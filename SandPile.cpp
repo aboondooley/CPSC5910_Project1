@@ -186,3 +186,17 @@ void SandPile::addPile(const SandPile &other){
                 "\n Cannot add them." << endl;
     }
 }
+
+
+bool SandPile::isInGroup() const {
+    int cells[ARRAY_SIZE];
+    for (int i = 0; i < ARRAY_SIZE; i++){
+        cells[i] = this->pile[i]; // get values to create copy of the Sandpile
+    }
+    SandPile zero;
+    zero.addPile(this->pile);
+    for (int i = 0; i < ARRAY_SIZE; i++){
+        if (this->pile[i] != zero.pile[i]) return false;
+    }
+    return true;
+}
