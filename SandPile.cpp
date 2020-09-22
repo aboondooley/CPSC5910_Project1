@@ -189,10 +189,6 @@ void SandPile::addPile(const SandPile &other){
 
 
 bool SandPile::isInGroup() const {
-    int cells[ARRAY_SIZE];
-    for (int i = 0; i < ARRAY_SIZE; i++){
-        cells[i] = this->pile[i]; // get values to create copy of the Sandpile
-    }
     SandPile zero;
     zero.addPile(this->pile);
     for (int i = 0; i < ARRAY_SIZE; i++){
