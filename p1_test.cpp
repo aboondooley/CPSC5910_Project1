@@ -22,24 +22,38 @@ void testAddPile(string test_name, int *a, const int *b){
 
 
 }
-/*
+
 void testAllSandPiles(){
     SandPile test;
     int array_size = test.COLS * test.ROWS;
     int max_stable = test.MAX_STABLE;
-    int count = 0;
+    int inGroup = 0;
+    int inTotal = 0;
     int cells[array_size];
 
-    for (int i=0;i<array_size;i++){ // 1
-        for (int i=0;i<array_size;i++){
-            for (int i=0;i<array_size;i++){ // 3
-                for (int i=0;i<array_size;i++){
-                    for (int i=0;i<array_size;i++){ // 5
-                        for (int i=0;i<array_size;i++){
-                            for (int i=0;i<array_size;i++){ // 7
-                                for (int i=0;i<array_size;i++){
-                                    for (int i=0;i<array_size;i++){ //9
-
+    for (int i=0;i<=max_stable;i++){ // 1
+        cells[0] = i;
+        for (int j=0;j<=max_stable;j++){
+            cells[1] = j;
+            for (int k=0;k<=max_stable;k++){ // 3
+                cells[2] = k;
+                for (int l=0;l<=max_stable;l++){
+                    cells[3] = k;
+                    for (int m=0;m<=max_stable;m++){ // 5
+                        cells[4] = m;
+                        for (int n=0;n<=max_stable;n++){
+                            cells[5] = n;
+                            for (int o=0;o<=max_stable;o++){ // 7
+                                cells[6] = o;
+                                for (int p=0;p<=max_stable;p++){
+                                    cells[7] = p;
+                                    for (int q=0;q<=max_stable;q++){ //9
+                                        cells[8] = q;
+                                        test.setPile(cells);
+                                        if (test.isInGroup()){
+                                           inGroup++;
+                                        }
+                                        inTotal++;
                                     }
                                 }
                             }
@@ -49,8 +63,11 @@ void testAllSandPiles(){
             }
         }
     }
+    cout << "sand piles in group: " << inGroup << endl;
+    cout << "out of total " << test.ROWS << "x" << test.COLS << " sand piles: "
+    << inTotal << endl;
 }
-*/
+
 
 int main() {
 
@@ -91,7 +108,7 @@ int main() {
     int a1[] = {0, 0, 0, 0, 2, 0, 0, 0, 0};
     int b1[] = {0, 0, 0, 0, 2, 0, 0, 0, 0};
     int a2[] = {1, 2, 0, 2, 1, 1, 0, 1, 3};
-    int b2[] = {1, 2, 0, 2, 1, 1, 0, 1, 3};
+    int b2[] = {2, 1, 3, 1, 0, 1, 0, 1, 0};
     int a3[] = {3, 3, 3, 3, 3, 3, 3, 3, 3};
     int b3[] = {3, 3, 3, 3, 3, 3, 3, 3, 3};
 
@@ -109,6 +126,7 @@ int main() {
         cout << "out group)" << endl;
     }
 
+    testAllSandPiles();
 
     return 0;
 }
