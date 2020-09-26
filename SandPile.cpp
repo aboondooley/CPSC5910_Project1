@@ -1,7 +1,6 @@
-//TODO create documentation for the sandpile class as a whole
-
 //
 // Created by Alie on 9/10/2020.
+// for Seattle University, CPSC 5005, Fall 2020
 // I added green comment chunks for the private helper functions I created.
 //
 
@@ -10,6 +9,73 @@
 #include "SandPile.h"
 
 using namespace std;
+
+// no arg ctor, so we assume they want 2 1 2 / 1 0 1 / 2 1 2
+SandPile::SandPile(){
+    pile = new int[ARRAY_SIZE];
+    int zero[] = {2, 1, 2, 1, 0, 1, 2, 1, 2};
+    this->setPile(zero);
+
+}
+
+// ctor with argument of cells to set the pile values to
+SandPile::SandPile(const int *cells) {
+    pile = new int[ARRAY_SIZE];
+    this->setPile(cells);
+}
+
+// copy ctor creates a new SandPile using an existing SandPile
+SandPile::SandPile(const SandPile &other) {
+    allPositive = other.allPositive;
+    pile = new int[ARRAY_SIZE];
+    for (int i = 0; i < ARRAY_SIZE; i++){
+        pile[i] = other.pile[i];
+    }
+}
+
+// dtor - deletes any structures that are part of SandPile on The Heap
+// In this case only this->pile needs to be deleted
+SandPile::~SandPile() {
+    //cout << "In the dtor!!" << endl;
+    delete[] this->pile;
+}
+
+// Assignment overload operator
+SandPile &SandPile::operator=(const SandPile &rhs) {
+    if (&rhs != this){
+        delete[] pile;
+        allPositive = rhs.allPositive;
+        pile = new int[ARRAY_SIZE];
+        for (int i = 0; i < ARRAY_SIZE; i++) {
+            pile[i] = rhs.pile[i];
+        }
+    }
+    return *this;
+}
+
+// Adds two SandPiles together
+void SandPile::addPile(const SandPile &other){
+    if (this->allPositive && other.allPositive) {
+        for (int i = 0; i < this->ARRAY_SIZE; i++) {
+            this->pile[i] += other.pile[i];
+        }
+        this->stabilize();
+    } else {
+        cout << "Oh no! One of the SandPiles contains a negative number. "
+                "\n Cannot add them." << endl;
+    }
+}
+
+// Checks if the SandPile is in the abelian group by adding it to the zero
+// SandPile. This does NOT change the SandPile. Const method
+bool SandPile::isInGroup() const {
+    SandPile zero;
+    zero.addPile(this->pile);
+    for (int i = 0; i < ARRAY_SIZE; i++){
+        if (this->pile[i] != zero.pile[i]) return false;
+    }
+    return true;
+}
 
 // Creates a Sandpile with the values given by the user
 // If the value contain a negative number, a warning is given to the user and
@@ -32,18 +98,6 @@ void SandPile::setPile(const int *cells) {
     }
 }
 
-SandPile::SandPile(){
-    pile = new int[ARRAY_SIZE];
-    int zero[] = {2, 1, 2, 1, 0, 1, 2, 1, 2};
-    this->setPile(zero);
-
-}
-
-
-SandPile::SandPile(const int *cells) {
-    pile = new int[ARRAY_SIZE];
-    this->setPile(cells);
-}
 
 // Checks to see if the Sandpile is stable (no cells > MAX_STABLE)
 bool SandPile::isStable() const {
@@ -175,24 +229,8 @@ void SandPile::giveToNeighbors(const vector<int> neighbors) {
     }
 }
 
-void SandPile::addPile(const SandPile &other){
-    if (this->allPositive && other.allPositive) {
-        for (int i = 0; i < this->ARRAY_SIZE; i++) {
-            this->pile[i] += other.pile[i];
-        }
-        this->stabilize();
-    } else {
-        cout << "Oh no! One of the SandPiles contains a negative number. "
-                "\n Cannot add them." << endl;
-    }
-}
 
 
-bool SandPile::isInGroup() const {
-    SandPile zero;
-    zero.addPile(this->pile);
-    for (int i = 0; i < ARRAY_SIZE; i++){
-        if (this->pile[i] != zero.pile[i]) return false;
-    }
-    return true;
-}
+
+
+

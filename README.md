@@ -11,3 +11,6 @@ Science Fundamentals Certificate. In this project we implemented a Sandpile.
 For the first lab we created a fixed length sand pile of 3X3 and created 
 methods to create, check if stable, stabilize if not stable, and print the 
 Sandpile.
+
+In the final project we created the fully functional version. 
+I updated my code so that my stabilize method can work for any size SandPile. 
